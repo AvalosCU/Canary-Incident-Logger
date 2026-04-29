@@ -38,11 +38,12 @@ def log_master_event(source, event, target, threat_level):
     with open(MASTER_LOG_TXT, "a") as f:
         f.write(txt_line)
 
-    file_exists = os.path.isfile(MASTER_LOG_CSV)
+    file_exists = os.path.isfile(MASTER_LOG_CSV) and os.path.getsize(MASTER_LOG_CSV) > 0
 
     with open(MASTER_LOG_CSV, "a", newline="") as f:
         writer = csv.writer(f)
 
+   
         if not file_exists:
             writer.writerow([
                 "trigger_id",
